@@ -16,8 +16,10 @@ Including another URLconf
 """
 
 from django.urls import path
+from blog import views
 
 urlpatterns = [
-    path('',),
+    path('', views.PostList.as_view(), name="post-list"),
+
     
 ]
