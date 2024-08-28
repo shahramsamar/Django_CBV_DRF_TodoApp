@@ -10,8 +10,8 @@ from django.views.generic import ListView
 this is for show list of post 
 '''    
 class PostList(ListView):
+    model = Post
     template_name = "blog/post-list.html"  
     context_object_name = "posts"
-    
-    def get_queryset(self):
-        return Post.objects.filter(status=True)
+    ordering = ("-id")
+    # paginate_by = 1
