@@ -6,8 +6,9 @@
     <title>post-list</title>
 </head>
 <body>
-    <p>{% for post in posts %}</p>
-    {{post}}
-<p>{% endfor %}</p>
+    <p>{% for post in posts %}</>
+        <a  href="{% url "post-detail" pk=post.id %}"><h2> {{ post.id}} - {{ post.title }}</h2></a>
+
+    <p>{% endfor %}</p>
 </body>
 </html>
