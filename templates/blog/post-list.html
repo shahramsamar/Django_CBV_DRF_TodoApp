@@ -3,12 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>post-list</title>
+    <title>Post List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            width: 60%;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #007BFF;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        a:hover h2 {
+            text-decoration: underline;
+        }
+        .post-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .post-item:last-child {
+            border-bottom: none;
+        }
+    </style>
 </head>
 <body>
-    <p>{% for post in posts %}</>
-        <a  href="{% url "post-detail" pk=post.id %}"><h2> {{ post.id}} - {{ post.title }}</h2></a>
-
-    <p>{% endfor %}</p>
+    <div class="container">
+        <h1>Blog Posts</h1>
+        
+        {% for post in posts %}
+            <div class="post-item">
+                <a href="{% url 'post-detail' pk=post.id %}">
+                    <h2>{{ post.id }} - {{ post.title }}</h2>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
 </body>
 </html>
