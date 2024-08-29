@@ -38,6 +38,14 @@
     <div class="post-container">
         <h1>{{ object.title }}</h1>
         <p>{{ object.content }}</p>
+        <h2>status:
+            {% if object.status %}
+                Published
+            {% else %}
+              no Published
+            {% endif %}  
+
+        </h2>
     </div>
 </body>
 </html>

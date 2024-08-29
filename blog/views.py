@@ -1,7 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse_lazy
 from blog.forms import PostForm
 from blog.models import Post
-from django.views.generic import ListView, DeleteView, CreateView, UpdateView, DetailView
+from django.views import View
+from django.views.generic import(
+    ListView,
+    DeleteView,
+    CreateView,
+    UpdateView,
+    DetailView )
 
 
 
@@ -16,7 +23,7 @@ PostListView:
 """  
 class PostListView(ListView):
     model = Post
-    template_name = "blog/post-list.html"  
+    template_name = "blog/post_list.html"  
     context_object_name = "posts"
     ordering = ("-id")
     # paginate_by = 1
@@ -27,9 +34,9 @@ PostDetailView:
     - Uses the 'blog/post-detail.html' template for rendering.
     - Displays detailed information for a single post instance.
 """
-class PostDetailView(DeleteView):
+class PostDetailView(DetailView):
     model = Post
-    template_name = "blog/post-detail.html"   
+    template_name = "blog/post_detail.html"   
              
 """
 PostCreateView:
@@ -40,9 +47,9 @@ PostCreateView:
 """
 class PostCreateView(CreateView):
     model = Post 
-    fields = ['title','content','status','published_date']
+    fields = ['title','content','status']
     success_url = '/'
-    template_name = "blog/post-form.html" 
+    template_name = "blog/post_form.html" 
     
     
 class PostUpdateView( UpdateView):
@@ -52,7 +59,7 @@ class PostUpdateView( UpdateView):
     model = Post 
     form_class = PostForm
     success_url = '/'    
-    template_name = "blog/post-form.html" 
+    template_name = "blog/post_form.html" 
 
 
 class PostDeleteView(DeleteView):
@@ -61,4 +68,17 @@ class PostDeleteView(DeleteView):
     '''  
     model = Post 
     success_url = '/'
-    template_name = "blog/post-confirm-delete.html" 
+    template_name = "blog/post_confirm_delete.html" 
+    
+class PostDoneView(View):  
+    model = Post
+    success_url = "/"
+    def get(self,request,*args,**kwargs):
+        # print('post id :',kwargs["pk"])
+        post = get_object_or_404(Post,pk=kwargs['pk'])
+        post.status = True
+        post.save()
+        # print('post status update')
+        return redirect(self.success_url)
+  
+

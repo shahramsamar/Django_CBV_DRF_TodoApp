@@ -14,7 +14,7 @@ PostAdmin:
         - `published_date`: Displays the date and time when the post was published.
 """
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['title','status','created_date', 'published_date']
+    list_display = ['title','status','created_date']
 
 
 

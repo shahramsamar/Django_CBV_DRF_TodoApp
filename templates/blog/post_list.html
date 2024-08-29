@@ -75,29 +75,30 @@
 <body>
     <div class="container">
         <h1>Blog Posts</h1>
-        
+          <!-- Create Button -->
+          <a href="{% url 'blog:post_create'  %}">Create</a> 
         {% for post in posts %}
             <div class="post-item">
                 <div>
-                    <a href="{% url 'blog:post-detail' pk=post.id %}">
+                    <a href="{% url 'blog:post_detail' pk=post.id %}">
                         <h2>{{ post.id }} - {{ post.title }}</h2>
                     </a>
                 </div>
                 <div class="buttons">
-                     <!-- Create Button -->
-                     <a href="{% url 'blog:post-create'  %}">Create</a> 
-
+                   
                     <!-- Edit Button -->
-                    <a href="{% url 'blog:post-update' pk=post.id %}">Edit</a>
+                    <a href="{% url 'blog:post_update' pk=post.id %}">Edit</a>
                     
                     <!-- Delete Button -->
-                    <a href="{% url 'blog:post-delete' pk=post.id %}">Delete</a>
-
-                    <!-- Delete Form without question -->
-                    <!-- <form action="{% url 'blog:post-delete' pk=post.id %}" method="post" style="display: inline;">
-                        {% csrf_token %}
-                        <button type="submit" style="background-color: #dc3545; color: white;">Delete</button>
-                    </form> -->
+                    <a href="{% url 'blog:post_delete' pk=post.id %}">Delete</a>
+                    <!-- Done Button -->
+                    {% if post.status %}
+                    <button type="button" disabled class="btn btn-disabled">Done</button>
+                    <!-- <a href="{% url 'blog:post_done' pk=post.id %}" style="display:none;">Done</a> -->
+                    {% else %}
+                    <a href="{% url 'blog:post_done' pk=post.id %}" class="btn btn-primary" >Done</a>
+                    {% endif %}  
+                    
                     
                 </div>
             </div>
