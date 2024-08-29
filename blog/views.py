@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from blog.forms import PostForm
 from blog.models import Post
-from django.views.generic import ListView, DeleteView, CreateView,UpdateView
+from django.views.generic import ListView, DeleteView, CreateView, UpdateView, DetailView
 
 
 
@@ -45,7 +45,7 @@ class PostCreateView(CreateView):
     template_name = "blog/post-form.html" 
     
     
-class PostEditView( UpdateView):
+class PostUpdateView( UpdateView):
     '''
     a class  based UpdateView to show post_form page
     '''  
@@ -53,3 +53,12 @@ class PostEditView( UpdateView):
     form_class = PostForm
     success_url = '/'    
     template_name = "blog/post-form.html" 
+
+
+class PostDeleteView(DeleteView):
+    '''
+    a class  based DeleteView to show post_form page
+    '''  
+    model = Post 
+    success_url = '/'
+    template_name = "blog/post-confirm-delete.html" 

@@ -66,7 +66,6 @@
         .buttons form button {
             background-color: #dc3545;
             border: none;
-            cursor: pointer;
         }
         .buttons form button:hover {
             background-color: #c82333;
@@ -80,13 +79,26 @@
         {% for post in posts %}
             <div class="post-item">
                 <div>
-                    <a href="{% url 'post-detail' pk=post.id %}">
+                    <a href="{% url 'blog:post-detail' pk=post.id %}">
                         <h2>{{ post.id }} - {{ post.title }}</h2>
                     </a>
                 </div>
                 <div class="buttons">
-                    <a href="{% url 'post-edit' pk=post.id %}">Edit</a>
-                   
+                     <!-- Create Button -->
+                     <a href="{% url 'blog:post-create'  %}">Create</a> 
+
+                    <!-- Edit Button -->
+                    <a href="{% url 'blog:post-update' pk=post.id %}">Edit</a>
+                    
+                    <!-- Delete Button -->
+                    <a href="{% url 'blog:post-delete' pk=post.id %}">Delete</a>
+
+                    <!-- Delete Form without question -->
+                    <!-- <form action="{% url 'blog:post-delete' pk=post.id %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" style="background-color: #dc3545; color: white;">Delete</button>
+                    </form> -->
+                    
                 </div>
             </div>
         {% endfor %}

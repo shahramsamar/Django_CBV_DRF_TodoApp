@@ -31,26 +31,43 @@
             display: flex;
             flex-direction: column;
         }
-        input[type="submit"] {
+        .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .form-buttons input, .form-buttons a {
             background-color: #007BFF;
             color: white;
             padding: 10px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
+            text-align: center;
+            text-decoration: none;
+            width: 48%;
         }
-        input[type="submit"]:hover {
+        .form-buttons input:hover, .form-buttons a:hover {
             background-color: #0056b3;
+        }
+        .form-buttons .back {
+            background-color: #6c757d;
+        }
+        .form-buttons .back:hover {
+            background-color: #5a6268;
         }
     </style>
 </head>
 <body>
     <div class="form-container">
         <h1>Create Post</h1>
-        <form method="post">{% csrf_token %}
+        <form method="post">
+            {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" value="Save">
+            <div class="form-buttons">
+                <input type="submit" value="Save">
+                <a href="/" class="back">Back</a>
+            </div>
         </form>
     </div>
 </body>
