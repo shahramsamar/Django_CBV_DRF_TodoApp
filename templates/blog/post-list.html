@@ -28,6 +28,7 @@
         }
         h2 {
             color: #007BFF;
+            margin: 0;
         }
         a {
             text-decoration: none;
@@ -39,9 +40,36 @@
         .post-item {
             padding: 15px 0;
             border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .post-item:last-child {
             border-bottom: none;
+        }
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .buttons a, .buttons form button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .buttons a:hover, .buttons form button:hover {
+            background-color: #0056b3;
+        }
+        .buttons form button {
+            background-color: #dc3545;
+            border: none;
+            cursor: pointer;
+        }
+        .buttons form button:hover {
+            background-color: #c82333;
         }
     </style>
 </head>
@@ -51,9 +79,15 @@
         
         {% for post in posts %}
             <div class="post-item">
-                <a href="{% url 'post-detail' pk=post.id %}">
-                    <h2>{{ post.id }} - {{ post.title }}</h2>
-                </a>
+                <div>
+                    <a href="{% url 'post-detail' pk=post.id %}">
+                        <h2>{{ post.id }} - {{ post.title }}</h2>
+                    </a>
+                </div>
+                <div class="buttons">
+                    <a href="{% url 'post-edit' pk=post.id %}">Edit</a>
+                   
+                </div>
             </div>
         {% endfor %}
     </div>

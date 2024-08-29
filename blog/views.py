@@ -1,6 +1,7 @@
 from django.shortcuts import render
+from blog.forms import PostForm
 from blog.models import Post
-from django.views.generic import ListView, DeleteView, CreateView
+from django.views.generic import ListView, DeleteView, CreateView,UpdateView
 
 
 
@@ -41,4 +42,14 @@ class PostCreateView(CreateView):
     model = Post 
     fields = ['title','content','status','published_date']
     success_url = '/'
+    template_name = "blog/post-form.html" 
+    
+    
+class PostEditView( UpdateView):
+    '''
+    a class  based UpdateView to show post_form page
+    '''  
+    model = Post 
+    form_class = PostForm
+    success_url = '/'    
     template_name = "blog/post-form.html" 
