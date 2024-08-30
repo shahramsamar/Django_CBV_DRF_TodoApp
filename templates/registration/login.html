@@ -106,7 +106,6 @@
 <body>
     <div class="login-container">
         <!-- <img src="{{ user.userprofile.profile_picture.url|default_if_none:'/static/default_avatar.jpg' }}" alt="Avatar"> -->
-
         <img src="https://via.placeholder.com/100" alt="Avatar">
   
         <h2>Member Login</h2>
@@ -116,7 +115,7 @@
             <input data-validate="Password is required" class="input-field" type="password" name="password" placeholder="Password">
             <button type="submit" class="login-btn">Login</button>
         </form>
-        <a href="#" class="signup-link">Create a new account</a>
+        <a href="{% url 'register' %}" class="signup-link">Create a new account</a>
     </div>
 </body>
 </html>

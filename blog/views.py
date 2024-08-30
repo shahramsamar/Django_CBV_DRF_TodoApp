@@ -48,7 +48,7 @@ PostCreateView:
 """
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post 
-    fields = ['title','content','status']
+    fields = ['title','content']
     success_url = '/'
     template_name = "blog/post_form.html" 
     

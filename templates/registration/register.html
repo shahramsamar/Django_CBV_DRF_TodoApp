@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,13 +98,16 @@
         <img src="https://via.placeholder.com/100" alt="Avatar">
         <h2>Create Account</h2>
 
-        <form action="{% url 'signup' %}" method="POST">
+        <form action="{% url 'register' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <input type="text" class="input-field" placeholder="Username" required>
-            <input type="email" class="input-field" placeholder="Email" required>
-            <input type="password" class="input-field" placeholder="Password" required>
-            <input type="password" class="input-field" placeholder="Confirm Password" required>
+            <input type="text" name="username" class="input-field" placeholder="Username" required>
+            <input type="email" name="email" class="input-field" placeholder="Email" required>
+            <input type="password" name="password1" class="input-field" placeholder="Password" required>
+            <input type="password" name="password2" class="input-field" placeholder="Confirm Password" required>
+            <!-- <label for="profile_picture">Upload Avatar:</label>
+            <input type="file" name="profile_picture" class="input-field"> -->
             <button type="submit" class="register-btn">Sign Up</button>
+
         </form>
 
         <a href="{% url 'login' %}" class="login-link">Already have an account? Login here</a>
