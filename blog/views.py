@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from blog.forms import PostForm
 from blog.models import Post
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import(
     ListView,
     DeleteView,
@@ -21,7 +22,7 @@ PostListView:
     - The posts are ordered by the 'id' field in descending order.
     - Pagination can be enabled by setting 'paginate_by'.
 """  
-class PostListView(ListView):
+class PostListView(LoginRequiredMixin, ListView):
     model = Post
     template_name = "blog/post_list.html"  
     context_object_name = "posts"
@@ -34,7 +35,7 @@ PostDetailView:
     - Uses the 'blog/post-detail.html' template for rendering.
     - Displays detailed information for a single post instance.
 """
-class PostDetailView(DetailView):
+class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
     template_name = "blog/post_detail.html"   
              
@@ -45,14 +46,14 @@ PostCreateView:
     - Upon successful creation, the user is redirected to the homepage ("/").
     - Uses the 'blog/post-form.html' template for the form rendering.
 """
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post 
     fields = ['title','content','status']
     success_url = '/'
     template_name = "blog/post_form.html" 
     
     
-class PostUpdateView( UpdateView):
+class PostUpdateView(LoginRequiredMixin, UpdateView):
     '''
     a class  based UpdateView to show post_form page
     '''  
@@ -62,7 +63,7 @@ class PostUpdateView( UpdateView):
     template_name = "blog/post_form.html" 
 
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(LoginRequiredMixin, DeleteView):
     '''
     a class  based DeleteView to show post_form page
     '''  
@@ -70,7 +71,7 @@ class PostDeleteView(DeleteView):
     success_url = '/'
     template_name = "blog/post_confirm_delete.html" 
     
-class PostDoneView(View):  
+class PostDoneView(LoginRequiredMixin, View):  
     model = Post
     success_url = "/"
     def get(self,request,*args,**kwargs):
