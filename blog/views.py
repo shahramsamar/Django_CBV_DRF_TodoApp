@@ -72,6 +72,9 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "blog/post_confirm_delete.html" 
     
 class PostDoneView(LoginRequiredMixin, View):  
+    '''
+    a class  based DoneView to done post in page
+    '''  
     model = Post
     success_url = "/"
     def get(self,request,*args,**kwargs):
