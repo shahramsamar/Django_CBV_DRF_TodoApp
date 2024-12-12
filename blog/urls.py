@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from django.urls import path
+from django.urls import path, include
 from blog import views
 
 app_name = 'blog'  # This defines the 'blog' namespace
@@ -28,6 +28,7 @@ urlpatterns = [
     path('post/<int:pk>/update/', views.PostUpdateView.as_view(), name='post_update'),
     path('post/<int:pk>/delete/', views.PostDeleteView.as_view(), name='post_delete'),
     path('post/<int:pk>/done/', views.PostDoneView.as_view(), name='post_done'),
+    path('api/v1/',include('blog.api.v1.urls')),
     
 
 
