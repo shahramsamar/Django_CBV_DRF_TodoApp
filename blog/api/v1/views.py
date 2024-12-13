@@ -44,8 +44,9 @@ def post_list(request):
 
 
 
-@api_view()
+@api_view(['GET','PUT'])
 def post_detail(request, id):
+   
     # try:
     #     post = Post.objects.get(pk=id)
     #     # print(post.__dict__)
@@ -58,9 +59,22 @@ def post_detail(request, id):
     
     # Get the post object or return a 404 error if not found
     post = get_object_or_404(Post, pk=id, status=True)
-    
-    # Serialize the post object
-    serializer = PostSerializer(post)
-    
-    # Return the serialized data as a response
-    return Response(serializer.data)
+
+    # Handle GET request
+    if request.method == 'GET':
+
+        # Serialize the post object
+        serializer = PostSerializer(post)
+        
+        # Return the serialized data as a response
+        return Response(serializer.data)
+        # Handle POST request
+    elif request.method == 'PUT':
+        # Create a serializer instance with the request data
+        serializer = PostSerializer(post, data=request.data)
+        # Validate the serializer data
+        if serializer.is_valid(raise_exception=True):
+        # Save the new post
+            serializer.save()
+        #  Return the serialized data of the new post
+        return Response(serializer.data)
