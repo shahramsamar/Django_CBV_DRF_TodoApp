@@ -8,11 +8,41 @@ from django.shortcuts import get_object_or_404
  
 
 
-@api_view()
+@api_view(['GET','POST'])
 def post_list(request):
-    posts = Post.objects.filter(status=True)
-    serializer = PostSerializer(posts, many=True)
-    return Response(serializer.data)
+    # Handle GET request
+    if request.method == 'GET':
+        # Retrieve all active posts
+        posts = Post.objects.filter(status=True)
+        # Serialize the queryset of posts
+        serializer = PostSerializer(posts, many=True)
+        # Return serialized data as response
+        return Response(serializer.data)
+    
+    # Handle POST request
+    elif request.method == 'POST':
+        # return Response("ok")
+        # return Response(request.data)
+
+        # Create a serializer instance with the request data
+        serializer = PostSerializer(data=request.data)
+        # Validate the serializer data
+        if serializer.is_valid(raise_exception=True):
+        # Save the new post
+            serializer.save()
+        # Return the serialized data of the new post
+            return Response(serializer.data)
+
+        # if serializer.is_valid():
+        # #     # Save the new post
+        #     serializer.save()
+        # #     # Return the serialized data of the new post
+        #     return Response(serializer.data)
+        # else:
+        #     # Return serializer errors if data is invalid
+        #     return Response(serializer.errors)
+
+
 
 @api_view()
 def post_detail(request, id):
@@ -25,6 +55,12 @@ def post_detail(request, id):
     # except Post.DoesNotExist:
     #     # return Response({'detail':'post dose not exist'},status=404)
     #     return Response({'detail':'post dose not exist'},status=status.HTTP_404_NOT_FOUND)
+    
+    # Get the post object or return a 404 error if not found
     post = get_object_or_404(Post, pk=id, status=True)
+    
+    # Serialize the post object
     serializer = PostSerializer(post)
+    
+    # Return the serialized data as a response
     return Response(serializer.data)

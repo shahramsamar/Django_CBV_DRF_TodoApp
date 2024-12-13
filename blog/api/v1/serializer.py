@@ -3,13 +3,13 @@ from ...models import Post
 
 
 
-class PostSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
-    title = serializers.CharField(max_length=255)
+# class PostSerializer(serializers.Serializer):
+#     id = serializers.IntegerField()
+#     title = serializers.CharField(max_length=255)
     
     
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         # fields = '__all__'
-        fields = ['title','content','status','created_date','updated_date']
+        fields = ['id','title','content','status','created_date','updated_date']
