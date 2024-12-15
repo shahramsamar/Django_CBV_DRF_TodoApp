@@ -92,3 +92,4 @@ This project is open-source and available for educational purposes.
 ---
 
 This `README.md` provides detailed instructions for setting up, using, and contributing to the **Django CBV ToDoApp CRUD** project. It covers installation, usage, and how to interact with the ToDo application using class-based views.
+![Alt](https://repobeats.axiom.co/api/embed/eabe6508a91fa38b4ace0060919094363916f544.svg "Repobeats analytics image")
