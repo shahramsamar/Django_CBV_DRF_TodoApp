@@ -1,6 +1,7 @@
 
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated,IsAdminUser,IsAuthenticatedOrReadOnly
 from blog.api.v1.serializer import PostSerializer
 from ...models import Post
 from rest_framework import status
@@ -9,6 +10,7 @@ from django.shortcuts import get_object_or_404
 
 
 @api_view(['GET','POST'])
+@permission_classes([IsAuthenticatedOrReadOnly])
 def post_list(request):
     # Handle GET request
     if request.method == 'GET':
@@ -45,6 +47,7 @@ def post_list(request):
 
 
 @api_view(['GET','PUT','DELETE'])
+@permission_classes([IsAuthenticatedOrReadOnly])
 def post_detail(request, id):
    
     # try:
@@ -69,7 +72,7 @@ def post_detail(request, id):
         
         # Return the serialized data as a response
         return Response(serializer.data)
-        
+
         # Handle PUT request
     elif request.method == 'PUT':
         # Create a serializer instance with the request data
@@ -87,4 +90,4 @@ def post_detail(request, id):
         post.delete()  
         #  Return the serialized data of the new post
         return Response({'detail':'item removed successfully'}, 
-                                                                 status=status.HTTP_204_NO_CONTENT)
+                                     status=status.HTTP_204_NO_CONTENT)
