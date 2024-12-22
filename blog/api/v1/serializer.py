@@ -13,3 +13,4 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         # fields = '__all__'
         fields = ['id','title','content','status','created_date','updated_date']
+        # read_only_fields = ['content', 'created_date']
