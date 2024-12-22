@@ -145,3 +145,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #         'rest_framework.permissions.IsAuthenticated',
 #     ]
 # }
+
+# coreapi for documents
+REST_FRAMEWORK = { 
+                  'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+                  # public pagination
+                #   'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+                #   'PAGE_SIZE': 100
+                  
+                  
+                  }
