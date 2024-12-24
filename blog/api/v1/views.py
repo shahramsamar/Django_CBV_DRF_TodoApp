@@ -5,6 +5,7 @@ from ...models import Post
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, status
 from blog.api.v1.permission import IsOwnerOrReadOnly
+from blog.api.v1.paginations import DefaultPagination
 
 
 
@@ -14,3 +15,5 @@ class PostModelViewSet(viewsets.ModelViewSet):
     permission_classes =[IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly]
     serializer_class = PostSerializer
     queryset = Post.objects.filter(status=True)
+
+    pagination_class = DefaultPagination
