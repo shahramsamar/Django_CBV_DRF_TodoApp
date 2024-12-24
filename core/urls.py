@@ -20,7 +20,9 @@ from django.urls import path, include
 from core import settings
 from django.conf.urls.static import static
 
-from rest_framework.documentation import include_docs_urls
+# from rest_framework.documentation import include_docs_urls
+# from rest_framework.schemas import get_schema_view
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 
 urlpatterns = [
@@ -28,9 +30,14 @@ urlpatterns = [
     path('accounts/',include('accounts.urls')),
     path('',include('blog.urls')),
     path('api-auth/',include('rest_framework.urls')),
-    path('api-docs/',include_docs_urls(title="api-sample")),
-
-
+    # path('api-docs/',include_docs_urls(title="api-sample")),
+    # path('api-docs/', get_schema_view(
+    #     title="API Documentation",
+    #     description="Sample API documentation",
+    #     version="1.0.0"
+    # ), name='api-docs'),
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
 ]
 
 
