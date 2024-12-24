@@ -22,3 +22,25 @@ class PostSerializer(serializers.ModelSerializer):
     def get_absolute_url(self, obj):
         request = self.context.get("request")
         return request.build_absolute_uri(obj.pk)
+    
+    def to_representation(self, instance):
+        """
+        Customize the data representation based on whether it's a single post or a list view.
+        """
+        request = self.context.get("request")
+        # print(request.__dict__)
+        rep =  super().to_representation(instance)
+        
+        # rep['state'] = 'list'
+        # if request.parser_context.get("kwargs").get('pk'):
+        #     rep['state'] = 'single'
+        if request.parser_context.get("kwargs").get('pk'):
+            # Single post view
+            rep.pop('snippet', None)
+            rep.pop('relative_url', None)
+            rep.pop('absolute_url', None)
+        else:
+            # List view
+            rep.pop('content', None)
+            
+        return rep
