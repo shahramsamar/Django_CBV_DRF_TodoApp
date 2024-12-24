@@ -44,3 +44,6 @@ class PostSerializer(serializers.ModelSerializer):
             rep.pop('content', None)
             
         return rep
+    def create(self, validated_data):
+        validated_data['user'] = self.context['request'].user  # Set the user to the current logged-in user
+        return super().create(validated_data)
