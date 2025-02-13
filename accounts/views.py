@@ -25,7 +25,7 @@ class CustomLoginView(LoginView):
 class RegisterView(SuccessMessageMixin, FormView):
     template_name = "registration/register.html"  # Update with the path to your HTML file
     form_class = UserCreationForm
-    success_url = reverse_lazy('login')  # Redirect to login page after successful registration
+    # success_url = reverse_lazy('blog:post_list')  # Redirect to login page after successful registration
     success_message = "Account created successfully! You can now log in."
 
     def form_valid(self, form):
@@ -42,3 +42,6 @@ class RegisterView(SuccessMessageMixin, FormView):
         messages.error(self.request, 
                        "There was an error with your registration. Please check the form and try again.")
         return super().form_invalid(form)
+    
+    def get_success_url(self):
+        return reverse_lazy('blog:post_list')
