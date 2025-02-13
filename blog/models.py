@@ -17,7 +17,8 @@ Post:
         - `__str__`: Returns the title of the post when the object is printed or displayed.
 """
 class Post(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,
+                                            null=True, blank= True)
 
     image = models.ImageField(null=True, blank= True)
     title = models.CharField(max_length=255)

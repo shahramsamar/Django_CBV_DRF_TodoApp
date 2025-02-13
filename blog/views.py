@@ -49,8 +49,12 @@ PostCreateView:
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post 
     fields = ['title','content']
-    success_url = '/'
     template_name = "blog/post_form.html" 
+    success_url = reverse_lazy("blog:post_list")
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(PostCreateView, self).form_valid(form)
     
     
 class PostUpdateView(LoginRequiredMixin, UpdateView):
