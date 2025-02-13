@@ -14,7 +14,8 @@
 
 # ready django in root and requirements.txt
 # create  image 
- docker build -t django .
+ docker bulid -t django .
+
 
 
 # run image and project

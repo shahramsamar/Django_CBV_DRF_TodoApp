@@ -30,4 +30,16 @@ swagger-spec-validator==3.0.4
 typing_extensions==4.12.2
 tzdata==2024.1
 uritemplate==4.1.1
+
+
+
+drf-spectacular
+
+
+
+# third party
+black
+flake8-django
+pre-commit
 urllib3
+
