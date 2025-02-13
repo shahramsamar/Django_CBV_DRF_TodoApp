@@ -17,6 +17,7 @@
  docker bulid -t django .
 
 
+
 # run image and project
  docker run -p 8000:8000 django
 
