@@ -161,3 +161,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
+
+# Custom User Model
+AUTH_USER_MODEL = "accounts.User" # Replace "yourapp" with your actual app name
+LOGIN_REDIRECT_URL = "blog:post_list"  # Change to your actual homepage or dashboard
+LOGOUT_REDIRECT_URL = "blog:post_list"  # Change to your actual homepage or dashboard
