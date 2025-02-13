@@ -1,95 +1,95 @@
-# Django CBV ToDoApp CRUD
+# Django CBV DRF TodoApp
 
-A simple ToDo application built using Django, demonstrating the use of class-based views (CBVs) for implementing CRUD (Create, Read, Update, Delete) operations. This application allows users to manage tasks through a user-friendly interface, with full functionality for adding, viewing, editing, and deleting tasks.
+A Todo application built using Django, Django REST Framework (DRF), and Class-Based Views (CBV).
 
 ## Features
 
-- **Create Tasks**: Add new tasks with a title and description.
-- **Read Tasks**: View a list of tasks with their details.
-- **Update Tasks**: Edit an existing task's title and description.
-- **Delete Tasks**: Remove tasks from the list.
-- **Class-Based Views**: Implements CRUD operations using Django's CBVs for better modularity and reuse.
+- CRUD operations for managing tasks
+- API endpoints using Django REST Framework
+- Authentication and permissions
+- Optimized with Django Class-Based Views
 
-## Requirements
+## Technologies Used
 
-- **Python 3.x**
-- **Django**: The main framework used for the project.
-- **SQLite** (default database for Django, can be replaced with PostgreSQL or MySQL).
+- Python
+- Django
+- Django REST Framework
+- PostgreSQL / SQLite (configurable)
+- Docker (optional)
 
-### Installation
+## Installation
 
-1. **Clone the repository:**
+1. Clone the repository:
 
-    ```bash
-    git clone https://github.com/shahramsamar/Django_Cbv_ToDoApp_CRUD.git
-    cd Django_Cbv_ToDoApp_CRUD
-    ```
+   ```sh
+   git clone https://github.com/shahramsamar/Django_CBV_DRF_TodoApp.git
+   cd Django_CBV_DRF_TodoApp
+   ```
 
-2. **Install Dependencies:**
+2. Create a virtual environment and activate it:
 
-    If you're using `pip`, run:
+   ```sh
+   python -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   ```
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+3. Install dependencies:
 
-3. **Apply Migrations**:
+   ```sh
+   pip install -r requirements.txt
+   ```
 
-    Run the following command to set up the database schema:
+4. Apply migrations:
 
-    ```bash
-    python manage.py migrate
-    ```
+   ```sh
+   python manage.py migrate
+   ```
 
-4. **Create a Superuser (Admin)**:
+5. Create a superuser:
 
-    To manage tasks via the admin panel:
+   ```sh
+   python manage.py createsuperuser
+   ```
 
-    ```bash
-    python manage.py createsuperuser
-    ```
+6. Run the development server:
 
-5. **Run the Development Server**:
+   ```sh
+   python manage.py runserver
+   ```
 
-    Start the development server with:
+7. Access the app:
 
-    ```bash
-    python manage.py runserver
-    ```
+   - API: `http://127.0.0.1:8000/api/`
+   - Admin Panel: `http://127.0.0.1:8000/admin/`
 
-    The application will be accessible at `http://127.0.0.1:8000/`.
+## API Endpoints
 
-### How to Use
+| Method | Endpoint        | Description               |
+|--------|---------------|---------------------------|
+| GET    | `/api/todos/`  | List all tasks           |
+| POST   | `/api/todos/`  | Create a new task        |
+| GET    | `/api/todos/{id}/` | Retrieve a task by ID  |
+| PUT    | `/api/todos/{id}/` | Update a task         |
+| DELETE | `/api/todos/{id}/` | Delete a task         |
 
-- **Access the To-Do List**: Visit the home page to see the list of tasks.
-- **Add a Task**: Click the "Add Task" button to create a new task with a title and description.
-- **Edit a Task**: Click the "Edit" button next to a task to update its details.
-- **Delete a Task**: Click the "Delete" button next to a task to remove it from the list.
-- **Admin Panel**: You can also manage tasks from the Django admin panel at `http://127.0.0.1:8000/admin/`.
+## Docker Support (Optional)
 
-### Project Structure
+1. Build and run the container:
 
-- `todo/`: The main app that contains the ToDo functionality.
-    - `models.py`: Defines the Task model with `title` and `description`.
-    - `views.py`: Contains class-based views for creating, reading, updating, and deleting tasks.
-    - `urls.py`: Routes the URLs for the task-related views.
-    - `forms.py`: Defines the form for adding and editing tasks.
-    - `templates/`: Stores HTML templates for rendering the views.
-        - `task_list.html`: Displays the list of tasks.
-        - `task_form.html`: The form used for creating or editing tasks.
-    - `static/`: Contains any static files (CSS, JavaScript).
-- `requirements.txt`: Lists all dependencies for the project (e.g., Django).
-- `manage.py`: The Django project management script for running the application.
+   ```sh
+   docker-compose up --build
+   ```
 
-### Contributing
+2. The application will be available at `http://127.0.0.1:8000/`.
 
-Feel free to fork the project and submit pull requests for new features, improvements, or bug fixes.
+## Contributing
 
-### License
+Feel free to fork this repository and submit pull requests. Any contributions, bug fixes, or improvements are welcome!
 
-This project is open-source and available for educational purposes.
+## License
+
+This project is licensed under the MIT License.
 
 ---
 
-This `README.md` provides detailed instructions for setting up, using, and contributing to the **Django CBV ToDoApp CRUD** project. It covers installation, usage, and how to interact with the ToDo application using class-based views.
-![Alt](https://repobeats.axiom.co/api/embed/eabe6508a91fa38b4ace0060919094363916f544.svg "Repobeats analytics image")
+**Author:** [Shahram Samar](https://github.com/shahramsamar)
