@@ -7,7 +7,7 @@ class CustomUserCreationForm(UserCreationForm):
 
     class Meta:
         model = User  # Use the custom user model
-        fields = ["username", "email", "password1", "password2"]  # Adjust based on your fields
+        fields = [ "email", "password1", "password2"]  # Adjust based on your fields
 
     def save(self, commit=True):
         user = super().save(commit=False)

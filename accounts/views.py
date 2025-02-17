@@ -1,9 +1,9 @@
-from django.shortcuts import redirect, render
+# from django.shortcuts import redirect, render
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.views.generic.edit import FormView
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from .forms import CustomUserCreationForm  # Import your custom form
