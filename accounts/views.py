@@ -12,6 +12,7 @@ User = get_user_model()  # Ensure the correct user model is used
 
 
 class CustomLoginView(LoginView):
+    '''for blog user login '''
     redirect_authenticated_user = True
     success_message = "Logged in successfully!"
 
@@ -21,9 +22,8 @@ class CustomLoginView(LoginView):
 
     def get_success_url(self):
         return reverse_lazy('blog:post_list')
-
-
 class RegisterView(SuccessMessageMixin, FormView):
+    ''' for blog user register'''
     template_name = "registration/register.html"  
     form_class = CustomUserCreationForm  # Use the custom form
     success_url = reverse_lazy('login')  
