@@ -4,8 +4,13 @@ from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import authenticate
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+
+
 
 class RegistrationSerializer(serializers.ModelSerializer):
+    ''' this serializer for registration'''
     password1 = serializers.CharField(max_length=255, write_only=True)
 
     class Meta:
@@ -29,6 +34,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         validated_data.pop("password1", None)
         return User.objects.create_user(**validated_data)
 class CustomAuthTokenSerializer(serializers.Serializer):
+    ''' this serializer is override AuthTokenSerializer and change name label '''
     email = serializers.CharField(label=_("email"), write_only=True)
     password = serializers.CharField(
         label=_("Password"),
@@ -64,3 +70,17 @@ class CustomAuthTokenSerializer(serializers.Serializer):
 
         attrs["user"] = user
         return attrs
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    '''create custom token for give email and userid in response'''
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        # print(data)
+        # data['test'] = 'test'
+        if not self.user.is_verified:
+            msg = _("user is not verifying.")
+            raise serializers.ValidationError(msg, code="verifying")
+        data["email"] = self.user.email
+        data["user_id"] = self.user.id
+        # print(data)
+        return data
