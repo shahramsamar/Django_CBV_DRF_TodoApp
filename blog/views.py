@@ -51,7 +51,9 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     fields = ['title','content']
     success_url = '/'
     template_name = "blog/post_form.html" 
-    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
     
 class PostUpdateView(LoginRequiredMixin, UpdateView):
     '''
