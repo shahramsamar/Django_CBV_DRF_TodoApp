@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'accounts',
     'rest_framework',
     'django_filters',
+    'rest_framework.authtoken',
+
 
     
     
@@ -166,4 +168,11 @@ AUTH_USER_MODEL ='accounts.User'
 # drf for documents                 }
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",]
 }
+
+
+ 

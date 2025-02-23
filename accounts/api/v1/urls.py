@@ -10,4 +10,8 @@ urlpatterns = [
     path(
         "registration/",views.RegistrationApiView.as_view(), name="registrations"
     ),
+      # login token
+    path(
+        "token/login/",views.CustomObtainAuthToken.as_view(), name="token-login"
+        ),
 ]
