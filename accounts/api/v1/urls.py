@@ -13,5 +13,9 @@ urlpatterns = [
       # login token
     path(
         "token/login/",views.CustomObtainAuthToken.as_view(), name="token-login"
-        ),
+    ),
+      # logout token
+    path(
+        "token/logout/",views.CustomDiscardAuthToken.as_view(), name="token-logout"
+    ),
 ]
