@@ -140,7 +140,9 @@
 
         <!-- Login Form -->
         <h2>Member Login</h2>
-        <form method="post" action="{% url 'login' %}">
+        {% comment %} <form method="post" action="{% url 'login' %}"> {% endcomment %}
+        <form method="post" action="#">
+
             {% csrf_token %}
             <input class="input-field" type="text" name="username" placeholder="Username" required>
             <input class="input-field" type="password" name="password" placeholder="Password" required>
@@ -148,7 +150,9 @@
         </form>
 
         <!-- Signup Link -->
-        <a href="{% url 'register' %}" class="signup-link">Create a new account</a>
+        {% comment %} <a href="{% url 'register' %}" class="signup-link">Create a new account</a> {% endcomment %}
+        <a href="#" class="signup-link">Create a new account</a>
+
     </div>
 </body>
 </html>

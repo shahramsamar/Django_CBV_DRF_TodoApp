@@ -120,7 +120,7 @@
 </head>
 <body>
     <div class="header">
-        <div>
+        {% comment %} <div>
             <!-- User avatar -->
             {% if user.userprofile.profile_picture %}
                 <img src="{{ user.userprofile.profile_picture.url }}" alt="Profile Picture" width="50" height="50">
@@ -128,8 +128,8 @@
                 <img src="https://via.placeholder.com/50" alt="Default Avatar" width="50" height="50">
             {% endif %}
             <span>Welcome {{ user.username }}</span>
-        </div>
-        <div class="auth-buttons">
+        </div> {% endcomment %}
+        {% comment %} <div class="auth-buttons">
             {% if user.is_authenticated %}
                 <!-- Logout Button -->
                 <a href="{% url 'logout' %}">Logout</a>
@@ -137,7 +137,7 @@
                 <!-- Login Button -->
                 <a href="{% url 'login' %}">Login</a>
             {% endif %}
-        </div>
+        </div> {% endcomment %}
     </div>
 
     <div class="container">
