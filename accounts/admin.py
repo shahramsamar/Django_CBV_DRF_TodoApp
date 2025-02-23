@@ -1,22 +1,64 @@
 from django.contrib import admin
-from django.contrib.auth.models import User
-from .models import UserProfile
+from django.contrib.auth.admin import UserAdmin
+from accounts.models import User, Profile
 
-class UserProfileAdmin(admin.ModelAdmin):
-    model = UserProfile
-    fields = ['user', 'profile_picture']
-    # readonly_fields = ['user']
 
-admin.site.register(UserProfile, UserProfileAdmin)
+class CustomUserAdmin(UserAdmin):
+    model = User
+    # 1 add_form = CustomUserCreationForm
+    list_display = ("email", "is_superuser", "is_active", "is_verified")
+    list_filter = ("email", "is_superuser", "is_active", "is_verified")
+    searching_fields = ("email",)
+    ordering = ("email",)
+    fieldsets = (
+        (
+            "Authentications",
+            {
+                "fields": ("email", "password"),
+            },
+        ),
+        (
+            "permissions",
+            {
+                "fields": (
+                    "is_staff",
+                    "is_active",
+                    "is_superuser",
+                    "is_verified",
+                ),
+            },
+        ),
+        (
+            "group permissions",
+            {
+                "fields": ("groups", "user_permissions"),
+            },
+        ),
+        (
+            "important date",
+            {
+                "fields": ("last_login",),
+            },
+        ),
+    )
+    add_fieldsets = (
+        (
+            None,
+            {
+                "classes": ("wide",),
+                "fields": (
+                    "email",
+                    "password1",
+                    "password2",
+                    "is_staff",
+                    "is_active",
+                    "is_superuser",
+                    "is_verified",
+                ),
+            },
+        ),
+    )
 
-class UserAdmin(admin.ModelAdmin):
-    list_display = ('username', 'email', 'profile_picture')
 
-    def profile_picture(self, obj):
-        try:
-            return obj.userprofile.profile_picture.url
-        except UserProfile.DoesNotExist:
-            return 'No picture'
-
-admin.site.unregister(User)
-admin.site.register(User, UserAdmin)
+admin.site.register(Profile)
+admin.site.register(User, CustomUserAdmin)
