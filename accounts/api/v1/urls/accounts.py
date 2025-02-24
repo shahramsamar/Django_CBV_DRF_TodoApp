@@ -39,4 +39,20 @@ urlpatterns = [
     ),
     # verify jwt token
     path("api/token/verify/", TokenVerifyView.as_view(), name="jwt_verify"),
+
+        # activation
+    path(
+        "activation/confirm/<str:token>",
+        views.ActivationApiView.as_view(),
+        name="Activation",
+    ),
+    # resend activation
+    path(
+        "activation/resend",
+        views.ActivationResendApiView.as_view(),
+        name="resend-activation",
+    ),
+
+
+
 ]

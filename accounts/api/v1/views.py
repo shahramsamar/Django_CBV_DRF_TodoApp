@@ -6,6 +6,8 @@ from accounts.api.v1.serializers import (
         CustomTokenObtainPairSerializer,
         ChangePasswordSerializer,
         ProfileSerializer,
+        ActivationResendApiSerializer,
+
 )
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
@@ -16,6 +18,15 @@ from rest_framework_simplejwt.views import (
 )
 from ...models import User,Profile
 from django.shortcuts import get_object_or_404
+from mail_templated import EmailMessage
+from accounts.api.v1.utils import EmailThread
+from rest_framework_simplejwt.tokens import RefreshToken
+from jwt.exceptions import ExpiredSignatureError, InvalidSignatureError
+from django.conf import settings
+import jwt
+
+
+
 
 
 class RegistrationApiView(generics.GenericAPIView):
@@ -28,9 +39,22 @@ class RegistrationApiView(generics.GenericAPIView):
             serializer.save()
             email = serializer.validated_data["email"]
             data = {"email": email}
+            user_obj = get_object_or_404(User, email=email)
+            token = self.get_tokens_for_user(user_obj)
+            email_obj = EmailMessage(
+                "email/activation_email.tpl",
+                {"token": token},
+                "shahramsamar2010@gmail.com",
+                to=[email],
+            )
+            EmailThread(email_obj).start()
             return Response(data, status=status.HTTP_201_CREATED)
-      
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def get_tokens_for_user(self, user):
+        refresh = RefreshToken.for_user(user)
+        return str(refresh.access_token)
 
 class CustomObtainAuthToken(ObtainAuthToken):
     '''this view for create token for user '''
@@ -97,3 +121,66 @@ class ProfileApiView(generics.RetrieveUpdateAPIView):
         queryset = self.get_queryset()
         obj = get_object_or_404(queryset, user=self.request.user)
         return obj
+
+ 
+class ActivationApiView(APIView):
+    def get(self, request, token, *args, **kwargs):
+        try:
+            token = jwt.decode(
+                token, settings.SECRET_KEY, algorithms=["HS256"]
+            )
+            user_id = token.get("user_id")
+        except ExpiredSignatureError:
+            return Response(
+                {"details": "token has been expired"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        except InvalidSignatureError:
+            return Response(
+                {"details": "token is not valid"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        user_obj = User.objects.get(pk=user_id)
+        if user_obj.is_verified:
+            return Response(
+                {"details": "your account has already been verified"}
+            )
+        user_obj.is_verified = True
+        user_obj.save()
+        return Response(
+            {
+                "details": "your account have you been verified and activated successfully"
+            }
+        )
+        # return Response (token)
+
+
+class ActivationResendApiView(generics.GenericAPIView):
+    serializer_class = ActivationResendApiSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = ActivationResendApiSerializer(data=request.data)
+        if serializer.is_valid():
+            user_obj = serializer.validated_data["user"]
+            token = self.get_tokens_for_user(user_obj)
+            email_obj = EmailMessage(
+                "email/activation_email.tpl",
+                {"token": token},
+                "shahramsamar2010@gmail.com",
+                to=[user_obj.email],
+            )
+            EmailThread(email_obj).start()
+            return Response(
+                {"detail": "user activation resend successfully"},
+                status=status.HTTP_200_OK,
+            )
+        else:
+            return Response(
+                {"details": "invalid request"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+    def get_tokens_for_user(self, user):
+        refresh = RefreshToken.for_user(user)
+        return str(refresh.access_token)
+       

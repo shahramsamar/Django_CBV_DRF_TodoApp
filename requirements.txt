@@ -36,10 +36,11 @@ uritemplate==4.1.1
 drf-spectacular
 djangorestframework_simplejwt
 
-
 # third party
 black
 flake8-django
 pre-commit
 urllib3
 
+# email third party
+django-mail-templated
