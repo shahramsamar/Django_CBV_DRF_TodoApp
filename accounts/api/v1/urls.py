@@ -28,7 +28,8 @@ urlpatterns = [
         name="change-password",
     ),
 
-
+      # profile
+    path("profile/", views.ProfileApiView.as_view(), name="Profile"),
 
 
 
