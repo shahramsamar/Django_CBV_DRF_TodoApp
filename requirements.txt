@@ -35,6 +35,8 @@ uritemplate==4.1.1
 
 drf-spectacular
 djangorestframework_simplejwt
+djoser
+
 
 # third party
 black
