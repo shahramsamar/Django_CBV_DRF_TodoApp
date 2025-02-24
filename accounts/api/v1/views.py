@@ -4,6 +4,7 @@ from accounts.api.v1.serializers import (
         RegistrationSerializer,
         CustomAuthTokenSerializer,
         CustomTokenObtainPairSerializer,
+        ChangePasswordSerializer,
 )
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
@@ -12,6 +13,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
 )
+from ...models import User
+
+
+
+
 class RegistrationApiView(generics.GenericAPIView):
     ''' this view for simple register '''
     serializer_class = RegistrationSerializer
@@ -54,3 +60,32 @@ class CustomDiscardAuthToken(APIView):
 class CustomTokenObtainPairView(TokenObtainPairView):
     ''' this view for login with jwt token '''
     serializer_class = CustomTokenObtainPairSerializer
+
+class ChangePasswordApiView(generics.GenericAPIView):
+    model = User
+    permission_classes = [IsAuthenticated]
+    serializer_class = ChangePasswordSerializer
+
+    def get_object(self, queryset=None):
+        obj = self.request.user
+        return obj
+
+    def put(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        Serializer = self.get_serializer(data=request.data)
+        if Serializer.is_valid():
+            if not self.object.check_password(
+                Serializer.data.get("old_password")
+            ):
+                return Response(
+                    {"old_password": ["Warning password"]},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+            self.object.set_password(Serializer.data.get("new_password"))
+            self.object.save()
+            return Response(
+                {"detail": "change password successfully"},
+                status=status.HTTP_200_OK,
+            )
+        return Response(Serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+

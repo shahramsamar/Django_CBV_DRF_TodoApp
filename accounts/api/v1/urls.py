@@ -21,6 +21,17 @@ urlpatterns = [
     path(
         "token/logout/",views.CustomDiscardAuthToken.as_view(), name="token-logout"
     ),
+        # change password
+    path(
+        "change-password/",
+        views.ChangePasswordApiView.as_view(),
+        name="change-password",
+    ),
+
+
+
+
+
        # custom jwt token
     path(
         "jwt/create/",
