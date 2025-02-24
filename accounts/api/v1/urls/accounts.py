@@ -5,7 +5,6 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView,
 )
 
-app_name='api-v1'
 
 urlpatterns = [
 
@@ -27,11 +26,6 @@ urlpatterns = [
         views.ChangePasswordApiView.as_view(),
         name="change-password",
     ),
-
-      # profile
-    path("profile/", views.ProfileApiView.as_view(), name="Profile"),
-
-
 
        # custom jwt token
     path(
