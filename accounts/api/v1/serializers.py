@@ -7,10 +7,9 @@ from django.contrib.auth import authenticate
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
-
-
 class RegistrationSerializer(serializers.ModelSerializer):
-    ''' this serializer for registration'''
+    """this serializer for registration"""
+
     password1 = serializers.CharField(max_length=255, write_only=True)
 
     class Meta:
@@ -33,8 +32,11 @@ class RegistrationSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data.pop("password1", None)
         return User.objects.create_user(**validated_data)
+
+
 class CustomAuthTokenSerializer(serializers.Serializer):
-    ''' this serializer is override AuthTokenSerializer and change name label '''
+    """this serializer is override AuthTokenSerializer and change name label"""
+
     email = serializers.CharField(label=_("email"), write_only=True)
     password = serializers.CharField(
         label=_("Password"),
@@ -71,8 +73,10 @@ class CustomAuthTokenSerializer(serializers.Serializer):
         attrs["user"] = user
         return attrs
 
+
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
-    '''create custom token for give email and userid in response'''
+    """create custom token for give email and userid in response"""
+
     def validate(self, attrs):
         data = super().validate(attrs)
         # print(data)
@@ -84,6 +88,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         data["user_id"] = self.user.id
         # print(data)
         return data
+
 
 class ChangePasswordSerializer(serializers.Serializer):
     old_password = serializers.CharField(required=True)
@@ -104,6 +109,7 @@ class ChangePasswordSerializer(serializers.Serializer):
             )
         return super().validate(value)
 
+
 class ProfileSerializer(serializers.ModelSerializer):
     email = serializers.CharField(source="user.email", read_only=True)
 
@@ -117,6 +123,8 @@ class ProfileSerializer(serializers.ModelSerializer):
             "image",
             "description",
         ]
+
+
 class ActivationResendApiSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)
 

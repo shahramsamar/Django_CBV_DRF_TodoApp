@@ -1,13 +1,12 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
 from accounts.api.v1.serializers import (
-        RegistrationSerializer,
-        CustomAuthTokenSerializer,
-        CustomTokenObtainPairSerializer,
-        ChangePasswordSerializer,
-        ProfileSerializer,
-        ActivationResendApiSerializer,
-
+    RegistrationSerializer,
+    CustomAuthTokenSerializer,
+    CustomTokenObtainPairSerializer,
+    ChangePasswordSerializer,
+    ProfileSerializer,
+    ActivationResendApiSerializer,
 )
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
@@ -16,7 +15,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
 )
-from ...models import User,Profile
+from ...models import User, Profile
 from django.shortcuts import get_object_or_404
 from mail_templated import EmailMessage
 from accounts.api.v1.utils import EmailThread
@@ -26,11 +25,9 @@ from django.conf import settings
 import jwt
 
 
-
-
-
 class RegistrationApiView(generics.GenericAPIView):
-    ''' this view for simple register '''
+    """this view for simple register"""
+
     serializer_class = RegistrationSerializer
 
     def post(self, request, *args, **kwargs):
@@ -56,8 +53,10 @@ class RegistrationApiView(generics.GenericAPIView):
         refresh = RefreshToken.for_user(user)
         return str(refresh.access_token)
 
+
 class CustomObtainAuthToken(ObtainAuthToken):
-    '''this view for create token for user '''
+    """this view for create token for user"""
+
     serializer_class = CustomAuthTokenSerializer
 
     def post(self, request, *args, **kwargs):
@@ -73,7 +72,8 @@ class CustomObtainAuthToken(ObtainAuthToken):
 
 
 class CustomDiscardAuthToken(APIView):
-    ''' this view for delete token user'''
+    """this view for delete token user"""
+
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
@@ -82,8 +82,10 @@ class CustomDiscardAuthToken(APIView):
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):
-    ''' this view for login with jwt token '''
+    """this view for login with jwt token"""
+
     serializer_class = CustomTokenObtainPairSerializer
+
 
 class ChangePasswordApiView(generics.GenericAPIView):
     model = User
@@ -113,6 +115,7 @@ class ChangePasswordApiView(generics.GenericAPIView):
             )
         return Response(Serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class ProfileApiView(generics.RetrieveUpdateAPIView):
     serializer_class = ProfileSerializer
     queryset = Profile.objects.all()
@@ -122,7 +125,7 @@ class ProfileApiView(generics.RetrieveUpdateAPIView):
         obj = get_object_or_404(queryset, user=self.request.user)
         return obj
 
- 
+
 class ActivationApiView(APIView):
     def get(self, request, token, *args, **kwargs):
         try:
@@ -183,4 +186,3 @@ class ActivationResendApiView(generics.GenericAPIView):
     def get_tokens_for_user(self, user):
         refresh = RefreshToken.for_user(user)
         return str(refresh.access_token)
-       

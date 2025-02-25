@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from accounts.models.users import User
 from accounts.models.profiles import Profile
 
+
 class CustomUserAdmin(UserAdmin):
     model = User
     # 1 add_form = CustomUserCreationForm

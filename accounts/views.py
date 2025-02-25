@@ -8,7 +8,6 @@
 # from django.contrib import messages
 
 
-
 # class CustomLoginView(LoginView):
 #     redirect_authenticated_user = True
 #     success_message = " is login successfully!"
@@ -39,6 +38,6 @@
 #     def form_invalid(self, form):
 #         # Handle errors
 #          # Add an error message when form validation fails
-#         messages.error(self.request, 
+#         messages.error(self.request,
 #                        "There was an error with your registration. Please check the form and try again.")
 #         return super().form_invalid(form)

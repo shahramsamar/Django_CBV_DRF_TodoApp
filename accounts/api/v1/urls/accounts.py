@@ -7,40 +7,43 @@ from rest_framework_simplejwt.views import (
 
 
 urlpatterns = [
-
-        # registration
+    # registration
     path(
-        "registration/",views.RegistrationApiView.as_view(), name="registrations"
+        "registration/",
+        views.RegistrationApiView.as_view(),
+        name="registrations",
     ),
-      # login token
+    # login token
     path(
-        "token/login/",views.CustomObtainAuthToken.as_view(), name="token-login"
+        "token/login/",
+        views.CustomObtainAuthToken.as_view(),
+        name="token-login",
     ),
-      # logout token
+    # logout token
     path(
-        "token/logout/",views.CustomDiscardAuthToken.as_view(), name="token-logout"
+        "token/logout/",
+        views.CustomDiscardAuthToken.as_view(),
+        name="token-logout",
     ),
-        # change password
+    # change password
     path(
         "change-password/",
         views.ChangePasswordApiView.as_view(),
         name="change-password",
     ),
-
-       # custom jwt token
+    # custom jwt token
     path(
         "jwt/create/",
         views.CustomTokenObtainPairView.as_view(),
         name="jwt_create",
     ),
-        # refresh jwt token
+    # refresh jwt token
     path(
         "api/token/refresh/", TokenRefreshView.as_view(), name="jwt_refresh"
     ),
     # verify jwt token
     path("api/token/verify/", TokenVerifyView.as_view(), name="jwt_verify"),
-
-        # activation
+    # activation
     path(
         "activation/confirm/<str:token>",
         views.ActivationApiView.as_view(),
@@ -52,7 +55,4 @@ urlpatterns = [
         views.ActivationResendApiView.as_view(),
         name="resend-activation",
     ),
-
-
-
 ]

@@ -4,7 +4,6 @@ from django.dispatch import receiver
 from .users import User
 
 
-
 class Profile(models.Model):
     """
     create profile for user and  our app

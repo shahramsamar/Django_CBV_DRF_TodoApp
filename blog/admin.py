@@ -2,8 +2,6 @@ from django.contrib import admin
 from blog.models import Post
 
 
-
-
 """
 PostAdmin:
     - This class customizes the admin interface for the Post model.
@@ -13,9 +11,10 @@ PostAdmin:
         - `created_date`: Displays the date and time when the post was created.
         - `published_date`: Displays the date and time when the post was published.
 """
-class PostAdmin(admin.ModelAdmin):
-    list_display = ['title','status','created_date']
 
+
+class PostAdmin(admin.ModelAdmin):
+    list_display = ["title", "status", "created_date"]
 
 
 # Register the Post model with its custom admin interface.

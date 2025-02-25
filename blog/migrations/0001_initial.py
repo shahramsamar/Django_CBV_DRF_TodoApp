@@ -26,7 +26,10 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("image", models.ImageField(blank=True, null=True, upload_to="")),
+                (
+                    "image",
+                    models.ImageField(blank=True, null=True, upload_to=""),
+                ),
                 ("title", models.CharField(max_length=255)),
                 ("content", models.TextField(max_length=255)),
                 ("status", models.BooleanField(default=False)),

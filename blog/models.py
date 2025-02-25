@@ -1,9 +1,9 @@
 from django.db import models
 from django.urls import reverse
+
 # from django.contrib.auth.models import User
 # from accounts.models import User
 from accounts.models.users import User
-
 
 
 """
@@ -20,23 +20,23 @@ Post:
     - Methods:
         - `__str__`: Returns the title of the post when the object is printed or displayed.
 """
+
+
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    image = models.ImageField(null=True, blank= True)
+    image = models.ImageField(null=True, blank=True)
     title = models.CharField(max_length=255)
     content = models.TextField(max_length=255)
     status = models.BooleanField(default=False)
-    created_date  = models.DateTimeField(auto_now_add=True)
+    created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
-   
 
-    
-    def __str__(self) :
+    def __str__(self):
         return self.title
-    
+
     def get_snippet(self):
         return self.content[0:5]
-    
+
     def get_absolute_api_url(self):
-         return reverse("blog:api-v1:post-detail", kwargs={"pk": self.pk})
+        return reverse("blog:api-v1:post-detail", kwargs={"pk": self.pk})
