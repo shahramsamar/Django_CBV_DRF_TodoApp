@@ -44,5 +44,9 @@ flake8-django
 pre-commit
 urllib3
 
+# testing
+pytest
+pytest-django
+
 # email third party
 django-mail-templated
