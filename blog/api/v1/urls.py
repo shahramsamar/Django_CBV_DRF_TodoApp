@@ -10,6 +10,5 @@ router.register("post", views.PostModelViewSet, basename="post")
 
 
 urlpatterns = [
-    path('', include(router.urls)),
-   
+    path("", include(router.urls)),
 ]

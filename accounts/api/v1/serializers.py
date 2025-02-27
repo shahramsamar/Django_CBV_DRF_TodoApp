@@ -19,9 +19,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     def validate(self, value):
         if value.get("password") != value.get("password1"):
-            raise serializers.ValidationError(
-                {"detail": "passwords doesn't match"}
-            )
+            raise serializers.ValidationError({"detail": "passwords doesn't match"})
         try:
             validate_password(value.get("password"))
 
@@ -97,16 +95,12 @@ class ChangePasswordSerializer(serializers.Serializer):
 
     def validate(self, value):
         if value.get("new_password") != value.get("new_password1"):
-            raise serializers.ValidationError(
-                {"detail": "passwords doesn't match"}
-            )
+            raise serializers.ValidationError({"detail": "passwords doesn't match"})
         try:
             validate_password(value.get("new_password"))
 
         except exceptions.ValidationError as e:
-            raise serializers.ValidationError(
-                {"new_password": list(e.messages)}
-            )
+            raise serializers.ValidationError({"new_password": list(e.messages)})
         return super().validate(value)
 
 
@@ -133,9 +127,7 @@ class ActivationResendApiSerializer(serializers.Serializer):
         try:
             user_obj = User.objects.get(email=email)
         except User.DoesNotExist:
-            raise serializers.ValidationError(
-                {"detail": "user does not exist"}
-            )
+            raise serializers.ValidationError({"detail": "user does not exist"})
         if user_obj.is_verified:
             raise serializers.ValidationError(
                 {"detail": "user is already activation and verified"}

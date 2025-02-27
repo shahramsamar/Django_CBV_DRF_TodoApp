@@ -18,13 +18,12 @@ def common_user():
     return user
 
 
-
 # @pytest.mark.filterwarnings("error")
 # @pytest.mark.filterwarnings("ignore:api-v1")
 @pytest.mark.django_db
 class TestPostApi:
     def test_get_post_response_200_status(self, api_client):
-        url = reverse('api-v1:post-list') 
+        url = reverse("api-v1:post-list")
         response = api_client.get(url)
         assert response.status_code == 200
 
@@ -50,15 +49,16 @@ class TestPostApi:
         response = api_client.post(url, data)
         assert response.status_code == 201
 
-    def test_create_post_invalid_data_response_400_status(self, api_client, common_user ):
+    def test_create_post_invalid_data_response_400_status(
+        self, api_client, common_user
+    ):
         user = common_user
         api_client.force_authenticate(user=user)
         url = reverse("api-v1:post-list")
         data = {
-            
             "title": "test",
             "status": True,
-        }        
-       
+        }
+
         response = api_client.post(url, data)
         assert response.status_code == 400

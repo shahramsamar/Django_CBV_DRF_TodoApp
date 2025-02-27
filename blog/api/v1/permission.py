@@ -15,6 +15,4 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         # Check if the object belongs to the current user (owner)
         # Adjust this based on how the user is associated with the Post model
         # If the user is stored on the request (like in request.user), you can modify this check accordingly.
-        return (
-            obj.user == request.user
-        )  # Ensure the `Post` object has the `user` field
+        return obj.user == request.user  # Ensure the `Post` object has the `user` field

@@ -38,9 +38,7 @@ urlpatterns = [
         name="jwt_create",
     ),
     # refresh jwt token
-    path(
-        "api/token/refresh/", TokenRefreshView.as_view(), name="jwt_refresh"
-    ),
+    path("api/token/refresh/", TokenRefreshView.as_view(), name="jwt_refresh"),
     # verify jwt token
     path("api/token/verify/", TokenVerifyView.as_view(), name="jwt_verify"),
     # activation

@@ -14,7 +14,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Setup Docker-Compose
-      run: docker-compose up -d
+    # - name: Setup Docker-Compose
+    #   run: docker-compose up -d
+    - name: Build and start services
+      run: docker compose up -d
     - name: Run tests
-       run: docker exec backend sh -c "black ."
+      run: docker exec backend sh -c "flake8 ."
