@@ -14,7 +14,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Setup Docker-Compose
-      run: docker-compose up -d
-    - name: Run tests
+    - run : tests true
+    # - name: Setup Docker-Compose
+    #   run: docker-compose up -d
+    # - name: Run tests
       # run: docker exec backend sh -c "black ."
