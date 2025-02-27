@@ -14,7 +14,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - run : tests true
+    - name: Tests Outpot
+      run : true
     # - name: Setup Docker-Compose
     #   run: docker-compose up -d
     # - name: Run tests
