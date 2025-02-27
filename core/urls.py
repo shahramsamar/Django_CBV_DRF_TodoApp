@@ -64,6 +64,7 @@ urlpatterns = [
         schema_view.with_ui("redoc", cache_timeout=0),
         name="schema-redoc",
     ),
+    path("api/v1/", include("blog.api.v1.urls", namespace="api-v1")),  # Ensure this line is correct
 ]
 
 
