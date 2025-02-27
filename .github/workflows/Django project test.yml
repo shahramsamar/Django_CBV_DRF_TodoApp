@@ -7,16 +7,23 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
-    # - name: Tests Outpot
-    #   run : true
-    - name: Setup Docker-Compose
-      run:  docker-compose up -d
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Set up Docker Compose
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y docker-compose
+
+    - name: Start Docker Compose Services
+      run: docker-compose up -d
+
     - name: Run Tests
-      run: docker exec backend "flake8"
+      run: docker exec backend flake8
+
