@@ -1,24 +1,17 @@
-name: Django project
-
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
 
+  Test:
+    name: Test
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v3
     - name: Setup Docker-Compose
       run: docker-compose up -d
-    - name: Wait for backend service
-      run: |
-        while ! docker exec Cbv curl -sSf http://localhost:8000 > /dev/null; do
-          echo "Waiting for backend service to be up..."
-          sleep 5
-        done
     - name: Run Tests
-      run: docker exec Cbv flake8
+      run: docker exec backend sh -c "flake8 && pytest ."
