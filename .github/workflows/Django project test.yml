@@ -14,9 +14,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Tests Outpot
-      run : true
-    # - name: Setup Docker-Compose
-    #   run: docker-compose up -d
-    # - name: Run tests
-      # run: docker exec backend sh -c "black ."
+    # - name: Tests Outpot
+    #   run : true
+    - name: Setup Docker-Compose
+      run:  docker-compose up -d
+    - name: Run Tests
+      run: docker exec backend "flake8"
