@@ -50,3 +50,5 @@ pytest-django
 
 # email third party
 django-mail-templated
+
+faker
