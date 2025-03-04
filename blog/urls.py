@@ -37,4 +37,6 @@ urlpatterns = [
     ),
     path("post/<int:pk>/done/", views.PostDoneView.as_view(), name="post_done"),
     path("api/v1/", include("blog.api.v1.urls", namespace="api-v1")),
+    path("post/api/", views.PostListApiView.as_view(), name="post_list_api"),
+
 ]

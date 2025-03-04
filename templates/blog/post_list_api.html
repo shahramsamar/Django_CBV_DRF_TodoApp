@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>post_list_api</title>
+</head>
+<body>
+    <h1>blog posts</h1>
+    <ol id="post-wrapper">
+    </ol>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $.get('/api/v1/post/',  
+            function (data, textStatus, jqXHR) { 
+                wrapper = $('#post-wrapper');
+                for (post of data.results){
+                    wrapper.append(`<li><a href="${post.absolute_url}"><h2>${post.title}</h2></a></li>`)
+                }
+            }); 
+    </script>
+
+</body>
+</html>
