@@ -9,6 +9,7 @@ from django.views.generic import (
     CreateView,
     UpdateView,
     DetailView,
+    TemplateView,
 )
 
 
@@ -99,3 +100,7 @@ class PostDoneView(LoginRequiredMixin, View):
         post.save()
         # print('post status update')
         return redirect(self.success_url)
+
+
+class PostListApiView(TemplateView):
+    template_name = 'blog/post_list_api.html'
