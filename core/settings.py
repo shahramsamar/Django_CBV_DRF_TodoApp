@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     "mail_templated",
     "djoser",
     "corsheaders",
+    'django_celery_beat',
+
 ]
 
 MIDDLEWARE = [
@@ -189,3 +191,14 @@ CORS_ALLOWED_ORIGINS = [
     # "http://localhost:8080",
     "http://127.0.0.1:8000",
 ]
+
+
+# celery config
+CELERY_BROKER_URL ='redis://redis:6379/1'
+
+# CELERY_BEAT_SCHEDULE={
+#     'send_email':{
+#         'task':'accounts.tasks.send_email',
+#         'schedule': 5
+#     }
+# }
