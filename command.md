@@ -85,3 +85,16 @@ docker-compose exec backend sh -c "pip install coreapi"
 # refactoring and test 
 docker-compose exec backend sh -c "pip install black"
 docker-compose exec backend sh -c "pip install flake8-django"
+
+
+
+
+
+# commands for celery
+docker-compose exec backend celery -A core worker --loglevel=INFO
+docker-compose exec backend celery -A  core beat --loglevel=INFO
+docker-compose exec redis-worker pip install django-celery-beat
+docker-compose exec backend pip install django-celery-beat
+
+
+celery -A core beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler

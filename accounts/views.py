@@ -41,3 +41,13 @@
 #         messages.error(self.request,
 #                        "There was an error with your registration. Please check the form and try again.")
 #         return super().form_invalid(form)
+
+# from django.shortcuts import render
+# from django.http import HttpResponse
+# import time
+# from .tasks import send_email
+
+# def send_email(request):
+#     time.sleep(3)
+#     # send_email.delay()
+#     return HttpResponse("<h1>done sending </h1>")

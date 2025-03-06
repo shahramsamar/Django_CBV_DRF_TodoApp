@@ -35,7 +35,7 @@ uritemplate==4.1.1
 
 
 
-# third party
+#  refactoring and tests third party
 black
 flake8-django
 pre-commit
@@ -44,12 +44,12 @@ urllib3
 # testing
 pytest
 pytest-django
+faker
+
 
 # email third party
 django-mail-templated
 
-# create fake data
-faker
 
 # api 
 drf-spectacular
@@ -58,3 +58,11 @@ djoser
 drf-spectacular==0.28.0
 drf-yasg==1.21.8
 django-cors-headers
+
+
+
+
+# background process and caching
+celery
+redis
+django_celery_beat
