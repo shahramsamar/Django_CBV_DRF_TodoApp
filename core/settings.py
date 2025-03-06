@@ -38,8 +38,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "drf_yasg",
-    "blog",
-    "accounts",
+    'accounts.apps.AccountsConfig',
+    "blog.apps.BlogConfig",
+
     "rest_framework",
     "django_filters",
     "rest_framework.authtoken",

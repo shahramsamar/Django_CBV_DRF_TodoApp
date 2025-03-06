@@ -65,3 +65,4 @@ django-cors-headers
 # background process and caching
 celery
 redis
+django_celery_beat
