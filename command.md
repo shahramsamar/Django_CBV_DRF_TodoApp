@@ -98,3 +98,13 @@ docker-compose exec backend pip install django-celery-beat
 
 
 celery -A core beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
+
+
+# redis chaching
+
+docker-compose exec redis-worker pip install django-redis
+docker-compose exec backend pip install django-redis
+# 
+redis-cli
+select db 1
+key *
