@@ -29,7 +29,7 @@ swagger-spec-validator==3.0.4
 typing_extensions==4.12.2
 tzdata==2024.1
 uritemplate==4.1.1
-
+requests
 
 
 
@@ -66,3 +66,7 @@ django-cors-headers
 celery
 redis
 django_celery_beat
+
+
+# redis chaching config
+django-redis

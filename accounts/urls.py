@@ -32,4 +32,6 @@ urlpatterns = [
     #     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     #     path('register/', views.RegisterView.as_view(), name='register'),
     # path('send_email/',views.send_email,name='send_email'),
+    path('fetch_weather/',views.fetch_weather,name='fetch_weather'),
+
 ]
