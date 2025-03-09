@@ -70,3 +70,8 @@ django_celery_beat
 
 # redis chaching config
 django-redis
+
+
+
+# deploment module
+gunicorn

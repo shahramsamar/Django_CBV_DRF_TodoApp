@@ -108,3 +108,8 @@ docker-compose exec backend pip install django-redis
 redis-cli
 select db 1
 key *
+
+
+
+# docker command 
+docker-compose -f docker-compose-stage.yml up --build
