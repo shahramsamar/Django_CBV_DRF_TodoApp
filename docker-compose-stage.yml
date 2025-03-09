@@ -15,7 +15,7 @@ services:
   backend:
     build: .
     container_name: Cbv
-    command:  gunicorn core.wsgi --bind 0.0.0.0:8000
+    command:  gunicorn core.wsgi --bind 0.0.0.0:8000 
     volumes:
       - ./:/app
       - static_volume:/app/static
