@@ -37,7 +37,7 @@ jobs:
               git pull
               docker-compose -f docker-compose-stage.yml restart
     
-    # you should go to repo-settings-secrets-action and create username,
+    # you should go to repo--> settings--> secrets and variable --> actions --> then  create environment like  username,
     #                                                          password,
     #                                                           host,
     #                                                           port and path      
