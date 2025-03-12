@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-rh)10532-c8@@tz)gu$1*f*ff%1%3(&xvs#h8xqy$neo2q)4n0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -38,9 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "drf_yasg",
-    'accounts.apps.AccountsConfig',
+    "accounts.apps.AccountsConfig",
     "blog.apps.BlogConfig",
-
     "rest_framework",
     "django_filters",
     "rest_framework.authtoken",
@@ -48,8 +47,7 @@ INSTALLED_APPS = [
     "mail_templated",
     "djoser",
     "corsheaders",
-    'django_celery_beat',
-
+    "django_celery_beat",
 ]
 
 MIDDLEWARE = [
@@ -184,7 +182,6 @@ EMAIL_HOST_PASSWORD = ""
 EMAIL_PORT = 25
 
 
-
 # cors-headers setting
 CORS_ALLOWED_ORIGINS = [
     # "https://example.com",
@@ -195,7 +192,7 @@ CORS_ALLOWED_ORIGINS = [
 
 
 # celery config
-CELERY_BROKER_URL ='redis://redis:6379/1'
+CELERY_BROKER_URL = "redis://redis:6379/1"
 
 # CELERY_BEAT_SCHEDULE={
 #     'send_email':{
@@ -212,6 +209,6 @@ CACHES = {
         "LOCATION": "redis://redis:6379/2",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-        }
+        },
     }
 }

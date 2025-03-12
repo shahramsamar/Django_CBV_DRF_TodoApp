@@ -1,6 +1,8 @@
 from celery import shared_task
+
 # from time import sleep
 from blog.models import Post
+
 
 @shared_task
 def delete_done_post():
@@ -13,19 +15,10 @@ def delete_done_post():
     #     print(post.title)
 
 
-
-
-
-
-
-
-
-
 # @shared_task
 # def send_email():
 #     sleep(3)
 #     print('done sending email')
-
 
 
 # wrong implementation
@@ -34,5 +27,3 @@ def delete_done_post():
 # def send_email():
 #     sleep(3)
 #     print('done sending email')
-
-

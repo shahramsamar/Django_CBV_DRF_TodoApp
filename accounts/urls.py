@@ -18,6 +18,7 @@ Including another URLconf
 from django.urls import path, include
 
 from accounts import views
+
 # from django.contrib.auth.views import LogoutView
 
 
@@ -32,6 +33,5 @@ urlpatterns = [
     #     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     #     path('register/', views.RegisterView.as_view(), name='register'),
     # path('send_email/',views.send_email,name='send_email'),
-    path('fetch_weather/',views.fetch_weather,name='fetch_weather'),
-
+    path("fetch_weather/", views.fetch_weather, name="fetch_weather"),
 ]

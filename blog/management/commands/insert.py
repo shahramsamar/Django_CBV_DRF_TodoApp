@@ -5,18 +5,17 @@ from accounts.models.profiles import Profile
 from blog.models import Post
 
 
-
 class Command(BaseCommand):
-    help= 'inserting dummy data'
+    help = "inserting dummy data"
 
     def __init__(self, *args, **kwargs):
-        super(Command,self).__init__(*args, **kwargs)
+        super(Command, self).__init__(*args, **kwargs)
         self.fake = Faker()
 
-
     def handle(self, *args, **options):
-        user = User.objects.create_user(email=self.fake.email(),
-                                        password="Test@#123456")
+        user = User.objects.create_user(
+            email=self.fake.email(), password="Test@#123456"
+        )
         profile = Profile.objects.get(user=user)
         profile.first_name = self.fake.file_name()
         profile.last_name = self.fake.last_name()
@@ -25,12 +24,12 @@ class Command(BaseCommand):
 
         for _ in range(6):
             Post.objects.create(
-            user = user,
-            title = self.fake.text(max_nb_chars=10),
-            content = self.fake.paragraph(nb_sentences=3),
-            status = True
+                user=user,
+                title=self.fake.text(max_nb_chars=10),
+                content=self.fake.paragraph(nb_sentences=3),
+                status=True,
             )
-        print(f'created {_} post successfully')
+        print(f"created {_} post successfully")
 
         # print(user)
         # print(profile)
