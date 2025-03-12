@@ -8,15 +8,14 @@ on:
     branches: [Testing-for-Api ]
 
 jobs:
-
   Test:
     name: Test
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Setup Docker-Compose
-      run: docker-compose up -d
+    - name: Build and start services
+      run: docker compose up -d
     - name: Run Tests
-      run: docker exec backend sh -c "flake8 && black ."
+      run: docker exec Cbv sh -c "flake8 && black ."
 
       
