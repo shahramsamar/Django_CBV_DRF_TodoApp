@@ -3,7 +3,7 @@ name: Django deploy
 on:
   push:
     branches: [ Testing-for-Api ]
-    
+
   pull_request:
     branches: [Testing-for-Api ]
 
