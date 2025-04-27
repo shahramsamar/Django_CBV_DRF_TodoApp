@@ -103,4 +103,4 @@ class PostDoneView(LoginRequiredMixin, View):
 
 
 class PostListApiView(TemplateView):
-    template_name = 'blog/post_list_api.html'
+    template_name = "blog/post_list_api.html"
